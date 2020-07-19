@@ -54,6 +54,44 @@ bot.on('message', message => {
     };
 });
 
+// Self-updating message
+bot.on('ready', function () { 
+    setInterval( function() {
+        let msgChannel = 'null'
+        bot.channels.fetch('734455536556179466').then(channel => {
+            msgChannel = channel
+        })
+
+        server.north.getPlayers().then(data => {
+            online.north = data
+            console.log(online);
+        });
+        // server.west.getPlayers().then(data => {
+        //     online.west = data
+        //     console.log(online);
+        // });
+        // server.south.getPlayers().then(data => {
+        //     online.south = data
+        //     console.log(online);
+        // });
+
+        const onlineMsg = new Discord.MessageEmbed()
+        .setTitle('Онлайн серверов:')
+        .addField('North', online.north + '/32')
+        .addField('West', online.west + '/32')
+        .addField('South', online.south + '/32')
+        .setFooter('Made by M4NT4#0001')
+        .setThumbnail(bot.guilds.cache.get('703749823169429614').iconURL())
+        .setColor(0x00FF15);
+        
+        msgChannel.messages.fetch({ limit: 1 }).then(message => {
+            let lastMsg = message.first();
+            lastMsg.delete();
+            msgChannel.send(onlineMsg);
+        });
+    }, 3000);
+});
+
 bot.on('ready', function() {
     console.log('Bot is on air!')
 });
