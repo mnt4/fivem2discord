@@ -16,9 +16,9 @@ const server = {
 }
 
 let online = {
-    north: 'Сервер выключен',
-    west: 'Сервер выключен',
-    south: 'Сервер выключен',
+    north: 'Сервер выключен ',
+    west: 'Сервер выключен ',
+    south: 'Сервер выключен ',
 }
 
 
@@ -30,16 +30,13 @@ bot.on('message', message => {
     
     if (cmd === 'online') {
         server.north.getPlayers().then(data => {
-            online.north = data
-            console.log(online);
+            online.north = data;
         });
         // server.west.getPlayers().then(data => {
-        //     online.west = data
-        //     console.log(online);
+        //     online.west = data;
         // });
         // server.south.getPlayers().then(data => {
-        //     online.south = data
-        //     console.log(online);
+        //     online.south = data;
         // });
 
         const onlineMsg = new Discord.MessageEmbed()
