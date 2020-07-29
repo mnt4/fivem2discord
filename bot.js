@@ -11,7 +11,7 @@ const config = {
 // WesternRP (to be replaced with a DB)
 const server = {
     north: new FiveM.Server('194.87.110.211:30120'),
-    west: new FiveM.Server('194.87.110.211:30121'),
+    west: new FiveM.Server('194.87.110.211:30123'),
     south: new FiveM.Server('194.87.110.211:30122'),
 }
 
@@ -42,7 +42,7 @@ bot.on('message', message => {
         const onlineMsg = new Discord.MessageEmbed()
         .setTitle('Онлайн серверов:')
         .addField('North', online.north + '/32')
-        .addField('West', online.west + '/32')
+        // .addField('West', online.west + '/32')
         .addField('South', online.south + '/32')
         .setFooter('Made by M4NT4#0001')
         .setThumbnail(message.guild.iconURL())
