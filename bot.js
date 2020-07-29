@@ -35,9 +35,9 @@ bot.on('message', message => {
         // server.west.getPlayers().then(data => {
         //     online.west = data;
         // });
-        // server.south.getPlayers().then(data => {
-        //     online.south = data;
-        // });
+        server.south.getPlayers().then(data => {
+            online.south = data;
+        });
 
         const onlineMsg = new Discord.MessageEmbed()
         .setTitle('Онлайн серверов:')
