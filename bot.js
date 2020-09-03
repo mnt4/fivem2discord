@@ -8,17 +8,17 @@ const config = {
     token: process.env.TOKEN,
 };
 
-// WesternRP (to be replaced with a DB)
+// WesternRP
 const server = {
-    north: new FiveM.Server('194.87.110.211:30120'),
-    west: new FiveM.Server('194.87.110.211:30123'),
-    south: new FiveM.Server('194.87.110.211:30122'),
+    first: new FiveM.Server('194.87.110.211:30120'),
+    second: new FiveM.Server('194.87.110.211:30123'),
+    third: new FiveM.Server('194.87.110.211:30122'),
 }
 
 let online = {
-    north: 'Сервер выключен ',
-    west: 'Сервер выключен ',
-    south: 'Сервер выключен ',
+    first: 'Сервер выключен ',
+    second: 'Сервер выключен ',
+    third: 'Сервер выключен ',
 }
 
 
@@ -29,24 +29,24 @@ bot.on('message', message => {
     const cmd = args.shift().toLowerCase();
     
     if (cmd === 'online') {
-        server.north.getPlayers().then(data => {
-            online.north = data
+        server.first.getPlayers().then(data => {
+            online.first = data
             console.log(online);
         });
-        // server.west.getPlayers().then(data => {
-        //     online.west = data
+        // server.second.getPlayers().then(data => {
+        //     online.second = data
         //     console.log(online);
         // });
-        // server.south.getPlayers().then(data => {
-        //     online.south = data
+        // server.third.getPlayers().then(data => {
+        //     online.third = data
         //     console.log(online);
         // });
 
         const onlineMsg = new Discord.MessageEmbed()
         .setTitle('Онлайн серверов:')
-        .addField('North', online.north + '/32')
-        // .addField('West', online.west + '/32')
-        .addField('South', online.south + '/32')
+        .addField('North', online.first + '/32')
+        // .addField('West', online.second + '/32')
+        .addField('South', online.third + '/32')
         .setFooter('Made by M4NT4#0001')
         .setThumbnail(message.guild.iconURL())
         .setColor(0x00FF15);
@@ -61,21 +61,21 @@ bot.on('message', message => {
         setInterval(() => {
             lastMsg.delete();
 
-            server.north.getPlayers().then(data => {
-                online.north = data
+            server.first.getPlayers().then(data => {
+                online.first = data
             });
-            // server.west.getPlayers().then(data => {
-            //     online.west = data
+            // server.second.getPlayers().then(data => {
+            //     online.second = data
             // });
-            // server.south.getPlayers().then(data => {
-            //     online.south = data
+            // server.third.getPlayers().then(data => {
+            //     online.third = data
             // });
     
             const onlineMsg = new Discord.MessageEmbed()
             .setTitle('Онлайн серверов:')
-            .addField('North', online.north + '/32')
-            .addField('West', online.west + '/32')
-            .addField('South', online.south + '/32')
+            .addField('North', online.first + '/32')
+            .addField('West', online.second + '/32')
+            .addField('South', online.third + '/32')
             .setFooter('Made by M4NT4#0001')
             .setThumbnail(message.guild.iconURL())
             .setColor(0x00FF15);
@@ -83,44 +83,6 @@ bot.on('message', message => {
         }, 15000);
     };
 });
-
-// Self-updating message
-// bot.on('ready', function () { 
-//     setInterval( function() {
-//         let msgChannel = 'null'
-//         bot.channels.fetch('734455536556179466').then(channel => {
-//             msgChannel = channel
-//         })
-
-//         server.north.getPlayers().then(data => {
-//             online.north = data
-//             console.log(online);
-//         });
-//         // server.west.getPlayers().then(data => {
-//         //     online.west = data
-//         //     console.log(online);
-//         // });
-//         // server.south.getPlayers().then(data => {
-//         //     online.south = data
-//         //     console.log(online);
-//         // });
-
-//         const onlineMsg = new Discord.MessageEmbed()
-//         .setTitle('Онлайн серверов:')
-//         .addField('North', online.north + '/32')
-//         .addField('West', online.west + '/32')
-//         .addField('South', online.south + '/32')
-//         .setFooter('Made by M4NT4#0001')
-//         .setThumbnail(bot.guilds.cache.get('703749823169429614').iconURL())
-//         .setColor(0x00FF15);
-        
-//         msgChannel.messages.fetch({ limit: 1 }).then(message => {
-//             let lastMsg = message.first();
-//             lastMsg.delete();
-//             msgChannel.send(onlineMsg);
-//         });
-//     }, 3000);
-// });
 
 bot.on('ready', function() {
     console.log('Bot is on air!')
