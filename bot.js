@@ -10,15 +10,15 @@ const config = {
 
 // WesternRP
 const server = {
-    first: new FiveM.Server('194.87.110.211:30120'),
-    second: new FiveM.Server('194.87.110.211:30123'),
-    third: new FiveM.Server('194.87.110.211:30122'),
+    north: new FiveM.Server('194.87.110.211:30120'),
+    west: new FiveM.Server('194.87.110.211:30123'),
+    south: new FiveM.Server('194.87.110.211:30122'),
 }
 
 let online = {
-    first: 'Сервер выключен ',
-    second: 'Сервер выключен ',
-    third: 'Сервер выключен ',
+    north: 'Сервер выключен ',
+    west: 'Сервер выключен ',
+    south: 'Сервер выключен ',
 }
 
 
@@ -29,24 +29,21 @@ bot.on('message', message => {
     const cmd = args.shift().toLowerCase();
     
     if (cmd === 'online') {
-        server.first.getPlayers().then(data => {
-            online.first = data
-            console.log(online);
+        server.north.getPlayers().then(data => {
+            online.north = data;
         });
-        // server.second.getPlayers().then(data => {
-        //     online.second = data
-        //     console.log(online);
+        // server.west.getPlayers().then(data => {
+        //     online.west = data;
         // });
-        // server.third.getPlayers().then(data => {
-        //     online.third = data
-        //     console.log(online);
-        // });
+        server.south.getPlayers().then(data => {
+            online.south = data;
+        });
 
         const onlineMsg = new Discord.MessageEmbed()
         .setTitle('Онлайн серверов:')
-        .addField('North', online.first + '/32')
-        // .addField('West', online.second + '/32')
-        .addField('South', online.third + '/32')
+        .addField('North', online.north + '/32')
+        // .addField('West', online.west + '/32')
+        .addField('South', online.south + '/32')
         .setFooter('Made by M4NT4#0001')
         .setThumbnail(message.guild.iconURL())
         .setColor(0x00FF15);
